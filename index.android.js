@@ -1,18 +1,18 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
   Text,
   View
 } from 'react-native';
+import styles from './style';
+var t = require('tcomb-form-native');
+import {
+    Scene,
+    Router,
+} from 'react-native-router-flux';
 
-URL = "http://54.238.130.212"
+
+//URL = "http://"
 
 export default class edu_app extends Component {
  constructor(props){
@@ -21,23 +21,26 @@ export default class edu_app extends Component {
 		mycheck: false
 	}
  }
-
+/*getInitialStateはReact.createClassの際に使う
   getInitialState(){
 	return {
 		getData: []
 	};
   }
+/*
 
+  /*
   componentDidMount(){
-	fetch(URL)
-		.then((response) => response.json())
-		.then(() => {
-			this.setState(mycheck: true)
-		})
+    fetch(URL)
+      .then((response) => response.json())
+		  .then(() => {
+        this.setState(mycheck: true)
+    })
 		.catch((error) => {
-			console.error(error);
+			console.error(error); 
 		});
   }
+  */
  
   render() {
     return (
@@ -57,23 +60,5 @@ export default class edu_app extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('edu_app', () => edu_app);
