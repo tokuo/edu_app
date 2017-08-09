@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-URL = "http://54.238.130.212"
+URL = "http://"
 
 export default class edu_app extends Component {
  constructor(props){

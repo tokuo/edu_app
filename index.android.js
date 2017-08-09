@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Text,
-  View
-} from 'react-native';
-import styles from './style';
+import { AppRegistry } from 'react-native';
 var t = require('tcomb-form-native');
-import {
-    Scene,
-    Router,
-} from 'react-native-router-flux';
+//import styles from './style';
+import App from './app.js'
 
-
-//URL = "http://"
+URL = "http://"
 
 export default class edu_app extends Component {
  constructor(props){
@@ -21,13 +13,6 @@ export default class edu_app extends Component {
 		mycheck: false
 	}
  }
-/*getInitialStateはReact.createClassの際に使う
-  getInitialState(){
-	return {
-		getData: []
-	};
-  }
-/*
 
   /*
   componentDidMount(){
@@ -44,21 +29,17 @@ export default class edu_app extends Component {
  
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <App />
     );
   }
 }
 
-
 AppRegistry.registerComponent('edu_app', () => edu_app);
+
+/* getInitialStateはReact.createClassの際に使う
+getInitialState(){
+	return {
+		getData: []
+	};
+}
+*/
