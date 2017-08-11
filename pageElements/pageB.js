@@ -5,12 +5,12 @@ import {
     TouchableOpacity,
     StyleSheet,
 } from 'react-native';
+import styles from '../styles/style';
 import {
     Actions,
 } from 'react-native-router-flux';
-import styles from '../styles/style';
 
-const PageB = () => (
+const PageB = (props) => (
     <View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome to React Native!
