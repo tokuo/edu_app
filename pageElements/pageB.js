@@ -10,6 +10,7 @@ import {
     Actions,
 } from 'react-native-router-flux';
 
+/*
 const PageB = (props) => (
     <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -24,5 +25,30 @@ const PageB = (props) => (
         </Text>
     </View>
 );
+*/
+
+class PageB extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+                                                                              
+    render(){
+        return(
+            <View style={styles.container}>
+                <Text style={styles.welcome}>
+                Welcome to React Native!,{'\n'}
+                {this.props.name}
+                </Text>
+                <Text style={styles.instructions}>
+                To get started, edit index.android.js
+                </Text>
+                <Text style={styles.instructions}>
+                Double tap R on your keyboard to reload,{'\n'}
+                Shake or press menu button for dev menu
+                </Text>
+            </View>
+        );
+    }
+}
 
 export default PageB;

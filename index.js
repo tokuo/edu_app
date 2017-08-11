@@ -9,20 +9,15 @@ import {
 import PageA from './pageElements/pageA';
 import PageB from './pageElements/pageB';
 
-URL = "http://"
+URL = "http://";
 
 export default class edu_app extends Component {
  constructor(props){
 	super(props);
 	this.state = {
-    mycheck: false
-  }
-  this.changeText = this.changeText.bind(this);
- }
-
- changeText = (event)=>{
-   this.setState({mycheck:event.target.value});
- }
+        mycheck: false
+    }
+}
 
   /*
   componentDidMount(){
