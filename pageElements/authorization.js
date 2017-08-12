@@ -4,7 +4,8 @@ import {
     View,
     Text,
     TouchableOpacity,
-    TextInput
+    TextInput,
+    Alert
 } from 'react-native';
 import styles from '../styles/style';
 import {
@@ -34,7 +35,10 @@ class auth extends Component {
     }
 
     _login = ()=>{
-        if (!this.state.username || !this.state.password) return;
+        if (!this.state.username || !this.state.password) {
+            Alert.alert('type it!');
+            return;
+        }
         fetch('http://', {
             method: 'POST',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -52,7 +56,10 @@ class auth extends Component {
     }
 
     _signup = ()=>{
-        if (!this.state.username || !this.state.password) return;
+        if (!this.state.username || !this.state.password) {
+            Alert.alert('type it!');
+            return;
+        }
         fetch('http://', {
             method: 'POST',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
