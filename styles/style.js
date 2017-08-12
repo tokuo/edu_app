@@ -17,6 +17,10 @@ import {StyleSheet} from 'react-native';
     color: '#333333',
     marginBottom: 5,
   },
+  inputText: {
+    marginBottom: 10,
+    padding: 10
+  },
 });
 
 export default styles;
