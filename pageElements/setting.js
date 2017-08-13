@@ -1,15 +1,28 @@
 import React, {Component} from 'react';
 import {
+    AsyncStorage,
     View,
     Text,
-    TouchableOpacity,
-    TextInput
+    TouchableOpacity
 } from 'react-native';
 import styles from '../styles/style';
+import {
+    Actions,
+} from 'react-native-router-flux';
 
 class demo extends Component {
     constructor(props) {
         super(props)
+    }
+
+    async _logout() {
+        try {
+            await AsyncStorage.removeItem('id_token');
+            Alert.alert('Logout Success!');
+            Actions.authPage();
+        } catch (error) {
+            console.log('AsyncStorage error: ' + error.message);
+        }
     }
 
     render(){
@@ -25,6 +38,9 @@ class demo extends Component {
                 Double tap R on your keyboard to reload,{'\n'}
                 Shake or press menu button for dev menu
                 </Text>
+                <TouchableOpacity onPress={this._logout}>
+                    <Text> {'\n'}Log Out </Text>
+                </TouchableOpacity>
             </View>
         );
     }

@@ -21,7 +21,6 @@ class auth extends Component {
             username: null,
             password: null
         }
-        this.saveItem = this.saveItem.bind(this);
         this._login = this._login.bind(this);
         this._signup = this._signup.bind(this);
     }

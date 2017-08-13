@@ -8,7 +8,7 @@ import {
 } from 'react-native-router-flux';
 import auth from './pageElements/authorization';
 import home from './pageElements/home';
-import demo from './pageElements/demo';
+import set from './pageElements/setting';
 
 
 
@@ -38,8 +38,8 @@ export default class edu_app extends Component {
         <Router>
             <Scene key="root">
                 <Scene key="authPage" initial={!this.state.hasToken} component={auth} title="認証" type="reset" />
-                <Scene key="homePage" initial={this.state.hasToken} component={home} title="Home" type="reset" />
-                <Scene key="demoPage" component={demo} title="Demo" />
+                <Scene key="homePage" initial={this.state.hasToken} component={home} title="Home" type="reset" onRight={() => Actions.setPage()}  rightTitle="設定"/>
+                <Scene key="setPage" component={set} title="設定" />
             </Scene>
         </Router>
         )
