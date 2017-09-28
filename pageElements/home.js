@@ -30,7 +30,7 @@ class home extends React.Component {
     /*
     getProtectedQuote() {
         AsyncStorage.getItem('id_token').then((token) => {
-            fetch('http://', {
+            fetch('http://127.0.0.1/api/v1/verify', {
                 method: 'GET',
                 headers: { 'Authorization': 'Bearer ' + token }
             })

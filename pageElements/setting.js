@@ -3,7 +3,8 @@ import {
     AsyncStorage,
     View,
     Text,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 } from 'react-native';
 import styles from '../styles/style';
 import {
