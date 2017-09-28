@@ -10,6 +10,7 @@ import styles from '../styles/style';
 import {
     Actions,
 } from 'react-native-router-flux';
+import QRCode from 'react-native-qrcode';
 
 class demo extends Component {
     constructor(props) {
@@ -32,6 +33,12 @@ class demo extends Component {
                 <Text style={styles.welcome}>
                 Welcome to React Native!
                 </Text>
+                <QRCode
+                    value='hogehoge'
+                    size={200}
+                    bgColor='purple'
+                    fgColor='white'
+                />
                 <Text style={styles.instructions}>
                 To get started, edit index.android.js
                 </Text>
