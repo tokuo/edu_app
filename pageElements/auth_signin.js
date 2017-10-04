@@ -18,11 +18,10 @@ class auth extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: null,
+            email: null,
             password: null
         }
         this._login = this._login.bind(this);
-        this._signup = this._signup.bind(this);
     }
 
     async saveItem(item, selectedValue) {
@@ -34,7 +33,7 @@ class auth extends Component {
     }
 
     _login = ()=>{
-        if (!this.state.username || !this.state.password) {
+        if (!this.state.email || !this.state.password) {
             Alert.alert('type it!');
             return;
         }
@@ -42,28 +41,7 @@ class auth extends Component {
             method: 'POST',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
             body: JSON.stringify({
-            username: this.state.username,
-            password: this.state.password,
-            })
-        })
-        .then((response) => response.json())
-        .then((responseData) => {
-            this.saveItem('id_token', responseData.id_token),
-            Actions.homePage();
-        })
-        .done();
-    }
-
-    _signup = ()=>{
-        if (!this.state.username || !this.state.password) {
-            Alert.alert('type it!');
-            return;
-        }
-        fetch('http://127.0.0.1/api/v1/users', {
-            method: 'POST',
-            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-            username: this.state.username,
+            email: this.state.email,
             password: this.state.password,
             })
         })
@@ -78,14 +56,14 @@ class auth extends Component {
     render(){
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}> Log_in or Sign_up </Text>
+                <Text style={styles.welcome}> Log_in </Text>
 
                 <View>
                 <TextInput
                     editable={true}
-                    onChangeText={(username) => this.setState({username})}
-                    placeholder='Username'
-                    ref='username'
+                    onChangeText={(email) => this.setState({email})}
+                    placeholder='email'
+                    ref='email'
                     returnKeyType='next'
                     style = {styles.inputText}
                     value={this.state.username}
@@ -105,11 +83,11 @@ class auth extends Component {
                 <TouchableOpacity onPress={this._login}>
                     <Text> Log In </Text>
                 </TouchableOpacity>
-
-                <TouchableOpacity onPress={this._signup}>
-                    <Text> Sign Up </Text>
-                </TouchableOpacity>
                 </View>
+
+                <TouchableOpacity onPress={Actions.authPage2}>
+                    <Text> {'\n'}change to sign_in </Text>
+                </TouchableOpacity>
 
                 <TouchableOpacity onPress={Actions.homePage}>
                     <Text> {'\n'}demo(change to homePage) </Text>

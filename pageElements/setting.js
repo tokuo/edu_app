@@ -21,7 +21,7 @@ class demo extends Component {
         try {
             await AsyncStorage.removeItem('id_token');
             Alert.alert('Logout Success!');
-            Actions.authPage();
+            Actions.authPage1();
         } catch (error) {
             console.log('AsyncStorage error: ' + error.message);
         }
