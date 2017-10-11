@@ -1,12 +1,12 @@
 import React from 'react';
 import {
     AsyncStorage,
-    TouchableOpacity,
-    Alert,
-    ScrollView,
-    TextInput,
+    ActivityIndicator,
     View,
-    Text
+    Text,
+    TouchableOpacity,
+    ScrollView,
+    ListView
 } from 'react-native';
 import styles from '../styles/style';
 import {
@@ -22,10 +22,15 @@ class home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            demo: ['tokuo']
+            demo: ['tokuo'],
+            dataSource: null,
+            _data: null,
+            isLoading: true,
+            isLoadingMore: false,
         }
         //this.getProtectedQuote = this.getProtectedQuote.bind(this);
         this.demo_function = this.demo_function.bind(this);
+        this._moreData = this._moreData.bind(this);
     }
 
     /*
@@ -44,6 +49,28 @@ class home extends React.Component {
     )}
     */
 
+    componentDidMount(){
+        let ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 !== r2,
+        });
+        const data = ['aaa','bbb','ccc','aaa','bbb','ccc','aaa','bbb','ccc','aaa','bbb','ccc','aaa','bbb','ccc','aaa','bbb','ccc','aaa','bbb','ccc','aaa','bbb','ccc','aaa','bbb','ccc','aaa','bbb','ccc'];
+        this.setState({
+            dataSource: ds.cloneWithRows(data),
+            _data: data,
+            isLoading: false,
+            isLoadingMore: false,
+        });
+    }
+
+    _moreData() {
+        let temp = this.state._data.concat('push');
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(temp),
+            _data: temp,
+            isLoadingMore: true
+        })
+    }
+
     demo_function() {
         let temp = this.state.demo;
         temp.push('tokuo');
@@ -51,22 +78,45 @@ class home extends React.Component {
     }
                                                                               
     render(){
-        return(
-            <ScrollableTabView>
-                <ScrollView tabLabel="1">
-                    <Text>{this.state.demo}</Text>
-                    <TouchableOpacity onPress={this.demo_function}>
-                        <Text> {'\n'}demo_function </Text>
-                    </TouchableOpacity>
-                </ScrollView>
-                <ScrollView tabLabel="2">
-                    <Text>hoge</Text>
-                </ScrollView>
-                <ScrollView tabLabel="3">
-                    <Text>hoge</Text>
-                </ScrollView>
-            </ScrollableTabView>
-        );
+        if (this.state.isLoading) {
+            return (
+                <View style={styles.container}>
+                    <ActivityIndicator size="large" />
+                </View>
+            );
+        } else {
+            return(
+                <ScrollableTabView>
+                    <ScrollView tabLabel="1">
+                        <Text>{this.state.demo}</Text>
+                        <TouchableOpacity onPress={this.demo_function}>
+                            <Text> {'\n'}demo_function </Text>
+                        </TouchableOpacity>
+                    </ScrollView>
+                    <ListView tabLabel="2"
+                        dataSource={this.state.dataSource}
+                        renderRow={rowData => {
+                            return (
+                                <View>
+                                    <Text>{rowData}</Text>
+                                </View>
+                            );
+                        }}
+                        onEndReached = {() => {
+                            this.setState({isLoadingMore: true}, () => this._moreData())
+                        }}
+                        renderFooter = {() => {
+                            return(
+                                this.state.isLoadingMore &&
+                                <View>
+                                    <ActivityIndicator size='small'/>
+                                </View>
+                            );
+                        }}
+                    />
+                </ScrollableTabView>
+            );
+        }
     }
 }
 
