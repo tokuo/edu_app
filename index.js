@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { AppRegistry, ActivityIndicator, AsyncStorage } from 'react-native';
-//var t = require('tcomb-form-native');
 import {
   Scene,
   Router,
   Actions
 } from 'react-native-router-flux';
-import auth from './pageElements/authorization';
+import auth1 from './pageElements/auth_signin';
+import auth2 from './pageElements/auth_signup';
 import home from './pageElements/home';
 import set from './pageElements/setting';
 
@@ -37,7 +37,8 @@ export default class edu_app extends Component {
         return (
         <Router>
             <Scene key="root">
-                <Scene key="authPage" initial={!this.state.hasToken} component={auth} title="認証" type="reset" />
+                <Scene key="authPage1" initial={!this.state.hasToken} component={auth1} title="sign in" type="reset" />
+                <Scene key='authPage2' component={auth2} title='sign up' type="reset" />
                 <Scene key="homePage" initial={this.state.hasToken} component={home} title="Home" type="reset" onRight={() => Actions.setPage()}  rightTitle="設定"/>
                 <Scene key="setPage" component={set} title="設定" />
             </Scene>

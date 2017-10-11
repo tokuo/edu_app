@@ -22,9 +22,10 @@ class home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            demo: 'tokuo'
+            demo: ['tokuo']
         }
         //this.getProtectedQuote = this.getProtectedQuote.bind(this);
+        this.demo_function = this.demo_function.bind(this);
     }
 
     /*
@@ -42,13 +43,21 @@ class home extends React.Component {
             }
     )}
     */
+
+    demo_function() {
+        let temp = this.state.demo;
+        temp.push('tokuo');
+        this.setState({ demo: temp });
+    }
                                                                               
     render(){
         return(
             <ScrollableTabView>
                 <ScrollView tabLabel="1">
-                    <Text>News</Text>
-                    <TextInput/>
+                    <Text>{this.state.demo}</Text>
+                    <TouchableOpacity onPress={this.demo_function}>
+                        <Text> {'\n'}demo_function </Text>
+                    </TouchableOpacity>
                 </ScrollView>
                 <ScrollView tabLabel="2">
                     <Text>hoge</Text>

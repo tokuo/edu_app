@@ -19,9 +19,10 @@ class auth extends Component {
         super(props)
         this.state = {
             username: null,
-            password: null
+            email: null,
+            password: null,
+            password_confirmation: null
         }
-        this._login = this._login.bind(this);
         this._signup = this._signup.bind(this);
     }
 
@@ -33,29 +34,8 @@ class auth extends Component {
         }
     }
 
-    _login = ()=>{
-        if (!this.state.username || !this.state.password) {
-            Alert.alert('type it!');
-            return;
-        }
-        fetch('http://127.0.0.1/api/v1/login', {
-            method: 'POST',
-            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-            username: this.state.username,
-            password: this.state.password,
-            })
-        })
-        .then((response) => response.json())
-        .then((responseData) => {
-            this.saveItem('id_token', responseData.id_token),
-            Actions.homePage();
-        })
-        .done();
-    }
-
     _signup = ()=>{
-        if (!this.state.username || !this.state.password) {
+        if (!this.state.username || !this.state.email || !this.state.password) {
             Alert.alert('type it!');
             return;
         }
@@ -64,12 +44,14 @@ class auth extends Component {
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
             body: JSON.stringify({
             username: this.state.username,
+            email: this.state.email,
             password: this.state.password,
+            password_confirmation: this.state.password_confirmation
             })
         })
         .then((response) => response.json())
         .then((responseData) => {
-            this.saveItem('id_token', responseData.id_token),
+            this.saveItem('id_token', responseData.user.access_token),
             Actions.homePage();
         })
         .done();
@@ -78,7 +60,7 @@ class auth extends Component {
     render(){
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}> Log_in or Sign_up </Text>
+                <Text style={styles.welcome}> Sign_up </Text>
 
                 <View>
                 <TextInput
@@ -93,8 +75,18 @@ class auth extends Component {
 
                 <TextInput
                     editable={true}
+                    onChangeText={(email) => this.setState({email})}
+                    placeholder='email'
+                    ref='email'
+                    returnKeyType='next'
+                    style = {styles.inputText}
+                    value={this.state.username}
+                />
+
+                <TextInput
+                    editable={true}
                     onChangeText={(password) => this.setState({password})}
-                    placeholder='Password'
+                    placeholder='パスワード'
                     ref='password'
                     returnKeyType='next'
                     secureTextEntry={true}
@@ -102,17 +94,24 @@ class auth extends Component {
                     value={this.state.password}
                 />
 
-                <TouchableOpacity onPress={this._login}>
-                    <Text> Log In </Text>
-                </TouchableOpacity>
+                <TextInput
+                    editable={true}
+                    onChangeText={(password_confirmation) => this.setState({password_confirmation})}
+                    placeholder='確認用パスワード'
+                    ref='password_confirmation'
+                    returnKeyType='next'
+                    secureTextEntry={true}
+                    style = {styles.inputText}
+                    value={this.state.password_confirmation}
+                />
 
                 <TouchableOpacity onPress={this._signup}>
                     <Text> Sign Up </Text>
                 </TouchableOpacity>
                 </View>
 
-                <TouchableOpacity onPress={Actions.homePage}>
-                    <Text> {'\n'}demo(change to homePage) </Text>
+                <TouchableOpacity onPress={Actions.authPage1}>
+                    <Text> {'\n'}change to sign_in </Text>
                 </TouchableOpacity>
             </View>
         );
