@@ -20,7 +20,8 @@ class auth extends Component {
         this.state = {
             username: null,
             email: null,
-            password: null
+            password: null,
+            password_confirmation: null
         }
         this._signup = this._signup.bind(this);
     }
@@ -45,11 +46,12 @@ class auth extends Component {
             username: this.state.username,
             email: this.state.email,
             password: this.state.password,
+            password_confirmation: this.state.password_confirmation
             })
         })
         .then((response) => response.json())
         .then((responseData) => {
-            this.saveItem('id_token', responseData.id_token),
+            this.saveItem('id_token', responseData.user.access_token),
             Actions.homePage();
         })
         .done();
@@ -84,12 +86,23 @@ class auth extends Component {
                 <TextInput
                     editable={true}
                     onChangeText={(password) => this.setState({password})}
-                    placeholder='Password'
+                    placeholder='パスワード'
                     ref='password'
                     returnKeyType='next'
                     secureTextEntry={true}
                     style = {styles.inputText}
                     value={this.state.password}
+                />
+
+                <TextInput
+                    editable={true}
+                    onChangeText={(password_confirmation) => this.setState({password_confirmation})}
+                    placeholder='確認用パスワード'
+                    ref='password_confirmation'
+                    returnKeyType='next'
+                    secureTextEntry={true}
+                    style = {styles.inputText}
+                    value={this.state.password_confirmation}
                 />
 
                 <TouchableOpacity onPress={this._signup}>

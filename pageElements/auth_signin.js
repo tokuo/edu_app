@@ -47,7 +47,7 @@ class auth extends Component {
         })
         .then((response) => response.json())
         .then((responseData) => {
-            this.saveItem('id_token', responseData.id_token),
+            this.saveItem('id_token', responseData.access_token),
             Actions.homePage();
         })
         .done();
@@ -86,7 +86,7 @@ class auth extends Component {
                 </View>
 
                 <TouchableOpacity onPress={Actions.authPage2}>
-                    <Text> {'\n'}change to sign_in </Text>
+                    <Text> {'\n'}change to sign_up </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={Actions.homePage}>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { AppRegistry, ActivityIndicator, AsyncStorage } from 'react-native';
-//var t = require('tcomb-form-native');
 import {
   Scene,
   Router,
